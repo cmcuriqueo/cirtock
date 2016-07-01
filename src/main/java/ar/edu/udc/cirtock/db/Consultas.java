@@ -13,16 +13,18 @@ public class Consultas {
 	public static LinkedList<Herramienta> obtenerHerramientas(Connection conn, String patronDescripcion, String patronNombre, Integer patronCantidad){
 		LinkedList<Herramienta> herramientas = new LinkedList<>();
 		StringBuffer query = new StringBuffer();
-		query.append("SELECT ");
-		query.append("  h.id");
-		query.append("  h.nombre");
-		query.append("  h.descripcion");
-		query.append("  h.cantidad");
+		query.append("SELECT");
+		query.append("  h.id,");
+		query.append("  h.nombre,");
+		query.append("  h.descripcion,");
+		query.append("  h.cantidad ");
 		query.append("FROM");
 		query.append("  cirtock.herramienta h");
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+			
 			ResultSet rs = preparedStatement.executeQuery();
+			
 			while (rs.next()) {
 				Herramienta nueva = new Herramienta();
 				nueva.setID(rs.getInt("id"));
