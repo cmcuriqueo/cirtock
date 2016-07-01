@@ -17,6 +17,7 @@ CREATE ROLE cirtock WITH ENCRYPTED PASSWORD 'cirtock';
 BEGIN TRANSACTION;
 
 CREATE SCHEMA cirtock;
+GRANT USAGE ON SCHEMA cirtock TO GROUP cirtock;
 
 CREATE SEQUENCE cirtock.seq_herramienta;
 
