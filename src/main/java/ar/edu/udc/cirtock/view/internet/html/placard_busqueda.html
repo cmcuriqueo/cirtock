@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Busqueda placard</title>
+<link href="../../index/css/estilo.css" rel="stylesheet" type="text/css" />
+<script src="../../index/js/validacion/lib/jquery.js"></script>
+<script src="../../index/js/validacion/dist/jquery.validate.js"></script>
+<script type="text/javascript">
+        
+       $().ready(function(){
+
+           $("#f_post").validate({
+               rules: {
+                   nombre: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20,
+
+                   },
+                   password:{
+                       required: true,
+                       minlength: 3
+                   }
+               },
+               messages: {
+                   nombre: {
+                       required: "Campo obligatorio",
+                       minlength: "Longitud minima 3 carácteres",
+                       maxlength: "Longitud maxima 20 carácteres"
+                   },
+                   password : {
+                       required: "Campo obligatorio",
+                       minlength: "Longitud minima 3 carácteres"
+                       
+                   }
+               }
+            });
+        });
+
+    </script>
+<style>
+        #commentForm {
+            width: 500px;
+        }
+        #commentForm label {
+            width: 250px;
+        }
+        #commentForm label.error, #commentForm input.submit {
+            margin-left: 253px;
+        }
+        #signupForm {
+            width: 670px;
+        }
+        #signupForm label.error {
+            margin-left: 10px;
+            width: auto;
+            display: inline;
+        }
+    </style>
+</head>
+<body><center>
+<!--Incio de contenido de la pagina principal-->
+<div class="etiquetaGenral">
+<!--encabezado de la pagina que html5 trae header tendra su estilo que esta en css-->
+  <header>
+    <a href="../../index.html"  class="logo"><img src="../imagenes/logotipo.png" width="150" height="120" alt=""/></a>
+   
+   <titulodelapagina>
+	
+    <div align="center">
+
+	<h2> SISTEMA DE CONTROL DE STOCK </h2>
+    
+</div>
+    </titulodelapagina>
+    
+   
+    <login><center>
+    <!--formulario de login que ya tiene el efecto-->  
+	<form id="f_post" method="get" action="../../intranet/html/producto.html"  >
+		<fieldset>				<!-- agrupa en un cuadro tendra color pero eso esta en css-->
+  			
+        <!--los divido en contendor para poder manipular con css-->		
+        <div>									
+		  	 <label for="nombre">Nombre</label>	
+ 			 <input name="nombre" type="text" id="nombre"/>
+ 		</div>
+    <br>
+ 		<div>
+ 		 	<label for="password">Contraseña</label>
+  			<input name="password" type="password" id="password"/>
+		 </div>
+	   		  <div>
+                
+                <p>
+				<input type="submit" value="ingresar" >                              
+                
+                </p>
+                <p></p>
+	   		  </div>
+              <p></p>
+
+</fieldset>
+
+</form>	   
+
+</center>
+<!--termina el formulario-->	      
+    </login>
+
+  
+         <p> <a href="../../extranet/catalogo.html">CATALOGO</a></p>
+  </header>
+
+</div>
+
+<br/>
+<br/>
+<br>
+<br>
+	<center><iframe width="560" height="315" src="https://www.youtube.com/embed/B0v4nIiQdsw" frameborder="0" allowfullscreen></iframe></center>
+	
+	<!--tabla donde se van a mostrar las herramientas y los insumos-->
+	<table border="7" style="margin: 0 auto">
+		<form>
+			<table border="7" style="margin: 0 auto">
+				<tr>
+					<td><input type="checkbox"><img src="../imagenes/martillo.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="../imagenes/cinta_metrica.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="../imagenes/serrucho.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="../imagenes/destornillador.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="../imagenes/tijeras.jpg"width="180" height="180"></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox"><img src="../imagenes/tabla_madera.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="../imagenes/clavos.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="../imagenes/soporte.png"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="../imagenes/tornillos.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="../imagenes/perilla.jpg"width="180" height="180"></td>
+				</tr>
+			</table>
+		</form>
+	</table>
+	<center>
+		<div>
+			<table border="7" bordercolor="green">
+				<tr>
+					<td><button><img src="../imagenes/confirmar.jpg" width="200" alt="Confirmar"></button></td>
+				</tr>
+			
+			</table>
+		</div>
+	</center>
+<footer>
+		<p>DERECHOS RESERVADOS UDC 2016</p>
+	</footer>
+</body>
+</html>

@@ -20,8 +20,6 @@ public class Consultas {
 		query.append("  h.cantidad");
 		query.append("FROM");
 		query.append("  cirtock.herramienta h");
-		if(patronCantidad != null || !patronDescripcion.equals("") || !patronNombre.equals(""))
-			query.append("WHERE");
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
 			ResultSet rs = preparedStatement.executeQuery();

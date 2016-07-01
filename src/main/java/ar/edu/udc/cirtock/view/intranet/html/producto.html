@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Productos</title>
+		<link href="../../index/css/estilo.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="../negocio/miJavaScript.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../index/bootstrap/css/bootstrap.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="../../index/bootstrap/css/bootstrap-responsive.css">
+	</head>
+	<body style="background-color:#f2f2f2 ">
+		<div class="container">
+			<div class="row-fluid" style="background-color: #CAE2EE;">
+				<div class="span2">
+					<img src="../../index/imagenes/logotipo.png" class="img-rounded" width="150" height="120" alt="cirtock">
+				</div>
+				<div class="span8">
+					<div class="well" style="background-color: #CAE2EE;border:1px;">
+						<h4 class="text-center">Admisitracion de  Productos</h4>
+					</div>
+				</div>
+				<div class="span2">
+					<h5>Sesion</h5>
+					<a href="../../index.html" class="btn btn-info">Cerrar Sesion</a>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="text-center">
+						<div class="span12" style="background: #F4FA81;">
+							<br>
+							<form class="form-search">
+								<input type="text" class="input-medium search-query" placeholder="nombre">
+								<button type="submit" class="btn btn-info"><i class="icon-search"></i></button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					<ul class="nav nav-list">
+						<li class="nav-header">Administraci&oacute;n</li>
+						<li class="active"><a href="#">Productos</a></li>
+						<li><a href="herramienta.html">Herramientas</a></li>
+						<li><a href="insumo.html">Insumos</a></li>
+						<li><a href="catalogo.html">Catalogo</a></li>
+						<li><a href="usuarios.html">Usuarios</a></li>
+				    </ul>
+				</div>
+				<div class="span10">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+			    				<tr>
+									<th>Nombre</th>
+									<th>Descripcion</th>
+									<th>Imagen</th>
+			    				</tr>
+			    			</thead>
+			    			<tbody>
+			    				<tr>
+									<td>Mesa</td>
+									<td>sin descripcion...</td>
+									<td>imagenes/mesa.png</td>
+									<td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
+									<td><a href="../negocio/mproducto.html" class="btn btn-info">Modificar</a></td>
+									<td><a href="../negocio/agregado/agregar-insumo.html" class="btn btn-info">Insimos</a></td>
+									<td><a href="../negocio/agregado/agregar-herramienta.html" class="btn btn-info">Herramientas</a></td>
+								</tr>
+			    				<tr>
+			    					<td>Silla</td>
+			    					<td>sin descripcion...</td>
+			    					<td>imagenes/silla.png</td>
+									<td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
+									<td><a href="" class="btn btn-info">Modificar</a></td>
+									<td><a href="" class="btn btn-info">Insimos</a></td>
+									<td><a href="" class="btn btn-info">Herramientas</a></td>
+			    				</tr>
+			    				<tr>
+			    					<td>Estante</td>
+									<td>sin descripcion...</td>
+									<td>imagenes/estante.png</td>
+									<td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
+									<td><a href="" class="btn btn-info">Modificar</a></td>
+									<td><a href="" class="btn btn-info">Insimos</a></td>
+									<td><a href="" class="btn btn-info">Herramientas</a></td>
+			    				</tr>
+			    			</tbody>
+		    			</table>
+		    		</div>
+				</div>
+			</div>
+			<div class="text-center">
+				<div class="row-fluid">
+					<div class="span12">
+						<a href="../negocio/cproducto.html" class="btn btn-info">Crear</a>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="text-center">
+						<div class="piepagina" id="piepagina" align="center">DERECHOS RESERVADOS UDC 2016</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

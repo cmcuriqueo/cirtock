@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.exception.CirtockSQLException;
+import java.util.Arrays;
 
 public class Herramienta {
 	private Integer id;
@@ -103,7 +104,7 @@ public class Herramienta {
 			query.append(") VALUES (");
 			query.append("  ?::text,");
 			query.append("  ?::text,");
-			query.append("  ?::text");
+			query.append("  ?::integer");
 			query.append(")");
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
@@ -124,16 +125,56 @@ public class Herramienta {
 	
 		} catch (SQLException e) {
 			System.out.println(e.getMessage() + " - " + usuario);
-			System.out.println(e.getStackTrace().toString());
+			System.out.println(Arrays.toString(e.getStackTrace()));
 			throw new CirtockSQLException("Error al agregar la herramienta a la base de datos");
 		}
 	}
 
-	public void update(String usuario, Connection conn) {
+	public void update(String usuario, Connection conn) throws CirtockException{
+
+		try {
+
+			StringBuffer query;
+                        query = new StringBuffer();
+			query.append("UPDATE cirtock.herramienta");
+			query.append("SET");
+			query.append("  nombre = ?::text,");
+			query.append("  descripcion = ?::text,");
+			query.append("  cantidad = ?::integer ");
+			query.append("WHERE id = ?::integer");
+
+			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+			preparedStatement.setString(1, this.nombre);
+			preparedStatement.setString(2, this.descripcion);
+			preparedStatement.setInt(3, this.cantidad);
+                        preparedStatement.setInt(4, this.id);
+			preparedStatement.executeUpdate();
+	
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + " - " + usuario);
+			System.out.println(Arrays.toString(e.getStackTrace()));
+			throw new CirtockSQLException("Error al actualizar la herramienta en la base de datos");
+		}
 		
 	}
 
-	public void delte(String usuario, Connection conn) {
-		
+	public void delete(String usuario, Connection conn) throws CirtockException {
+
+		try {
+
+			StringBuffer query;
+                        query = new StringBuffer();
+			query.append("DELETE cirtock.herramienta");
+			query.append("WHERE id = ?::integer");
+
+			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+			preparedStatement.setInt(1, this.id);
+			preparedStatement.executeUpdate();
+	
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + " - " + usuario);
+			System.out.println(Arrays.toString(e.getStackTrace()));
+			throw new CirtockSQLException("Error al eliminar la herramienta de la base de datos");
+		}
 	}
 }

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Post</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <script language="JavaScript" src="miJavaScript.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../index/bootstrap/css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../index/bootstrap/css/bootstrap-responsive.css">
+    <style type="text/css">
+        label.error {
+            color: red;
+        }
+    </style>
+
+    <!-- Jquery-ui -->
+    <link href="../../index/js/ui/jquery-ui.css" rel="stylesheet">
+    <script src="../../index/js/ui/external/jquery/jquery.js"></script>
+    <script src="../../index/js/ui/jquery-ui.js"></script>
+
+    <!-- Jquery.validate-->
+
+    <script src="../../index/js/validacion/dist/jquery.validate.js"></script>
+
+    <!-- Codigo jQuery que aplica evento -->
+    <script type="text/javascript">
+        $().ready(function(){
+            $("#f_usuario").validate({
+                rules: {
+                    nombre : {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                    },
+                    apellido: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                    },
+                    n_usuario: {
+                        required: true,
+                        minlength: 5
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    email2:{
+                        required: true,
+                        equalTo: "#email",
+                        email: true
+                    }
+                },
+                messages: {
+                    nombre:{
+                        required: "Campo obligatorio",
+                        minlength: "Longitud minima 3 carácteres",
+                        maxlength: "Longitud maxima 20 carácteres"
+                    },
+                    apellido: {
+                        required: "Campo obligatorio",
+                        minlength: "Longitud minima 3 carácteres",
+                        maxlength: "Longitud maxima 20 carácteres" 
+                    },
+                    n_usuario: {
+                        required: "Campo obligatorio",
+                        minlength: "Longitud minima 5 carácteres"
+                    },
+                    email: {
+                        required: "Campo obligatorio",
+                        email: "Ingrese una direccion email valida"
+                    },
+                    email2: {
+                        required: "Campo obligatorio",
+                        equalTo: "El email no coincide",
+                        email: "Ingrese una direccion email valida"
+                    }
+                }
+            });
+
+            $("#n_usuario").focus(function() {
+                var firstname = $("#nombre").val();
+                var lastname = $("#apellido").val();
+                if (firstname && lastname && !this.value) {
+                    this.value = firstname + "." + lastname;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span4">
+                <legend align="center">Crear Usuario</legend>
+                <form class="form-horizontal" role="form" id="f_usuario" method="get" action="../html/usuarios.html">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" name="nombre" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido</label>
+                        <input id="apellido" name="apellido" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="n_usuario">Nombre de Usuario</label>
+                        <input id="n_usuario" name="n_usuario" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Fecha Nacimiento</label>
+                        <input id="date" name="date" type="text" >
+                        <script> $("#date").datepicker({}); </script>
+                    </div>
+                    <div class="form-group">
+                         <label for="email">Correo</label>
+                         <input id="email" type="email" name="email" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="email2">Reingrese el Correo</label>
+                        <input id="email2" type="email" name="email2">
+                    </div>
+                    <br><br>
+                    <input class="btn btn-info" type="button" onclick="confirmar()" value="Cancelar">
+                    <input class="btn btn-info" type="submit" value="Guardar" >
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

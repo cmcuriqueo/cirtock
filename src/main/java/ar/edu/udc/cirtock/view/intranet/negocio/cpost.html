@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Post</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  	<script language="JavaScript" src="miJavaScript.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../index/bootstrap/css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../index/bootstrap/css/bootstrap-responsive.css">
+    <style type="text/css">
+        label.error {
+            color: red;
+        }
+    </style>
+
+    <script src="../../index/js/validacion/lib/jquery.js"></script>
+    <script src="../../index/js/validacion/dist/jquery.validate.js"></script>
+    <!-- Codigo jQuery que aplica evento -->
+    <script type="text/javascript">
+
+       $().ready(function(){
+           $("#f_post").validate({
+               rules: {
+                   nombre: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                   },
+                   descripcion: "required",
+                   g_trabajo: {
+                       required: true,
+                       minlength: 3
+                   }
+               },
+               messages: {
+                   nombre: {
+                       required: "Campo obligatorio",
+                       minlength: "Longitud minima 3 carácteres",
+                       maxlength: "Longitud maxima 20 carácteres"
+                   },
+                   descripcion: "Campo obligatorio",
+                   g_trabajo: {
+                       required: "Campo obligatorio",
+                       minlength: "Longitud minima 3 carácteres"
+                   }
+               }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span4">
+                <legend align="center">Crear Post</legend>
+                <form class="form-horizontal" role="form" id="f_post" method="get" action="../html/catalogo.html">
+                    <div class="form-group">
+                        <label for="nombre">Nombre de Post</label>
+                        <input id="nombre" name="nombre" type="text" >
+                    </div> 
+                    <div class="form-group">
+                        <label for="descripcion">Descripci&oacute;n</label>
+                        <input name="descripcion" id="descripcion" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="g_trabajo" >Grupo de Trabajo</label>
+                        <textarea id="g_trabajo" name="g_trabajo"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjunto</label>
+                        <label class="btn btn-info btn-file">
+                            Examinar<input type="file" style="display: none;">
+                        </label>
+                    </div>
+                    <br><br>
+                    <input class="btn btn-info" type="button" onclick="confirmar()" value="Cancelar">
+                    <input type="submit" class="btn btn-info" value="Guardar">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

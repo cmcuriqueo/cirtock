@@ -1,0 +1,117 @@
+
+    
+ <!doctype html>
+<html>
+<head>
+		<style type="text/css">
+			.izquierda{
+				text-align:left; 			
+			}	 	
+		</style>
+<meta charset="UTF-8">
+<title>Catálogo de sillas</title>
+<link href="../index/css/estilo.css" rel="stylesheet" type="text/css">
+ <script src="../index/js/validacion.js"></script>
+</head>
+
+
+<body >
+<!--Incio de contenido de la pagina principal-->
+<div class="etiquetaGenral">
+<!--encabezado de la pagina que html5 trae header tendra su estilo que esta en css-->
+  <header>
+    <a href="../index.html"  class="logo"><img src="../index/imagenes/logotipo.png" width="150" height="120" alt=""/></a>
+   
+   <titulodelapagina>
+  
+    <div align="center">
+  <h2> SISTEMA DE CONTROL DE STOCK </h2>
+    </div>
+      
+    
+    
+    </titulodelapagina>
+	<login><center>
+    <!--formulario de login que ya tiene el efecto-->  
+  <form name="login"  action="../intranet/html/producto.html" onsubmit="return comprobar()"  >
+  <fieldset>        <!-- agrupa en un cuadro tendra color pero eso esta en css-->
+        
+        <!--los divido en contendor para poder manipular con css-->   
+        <div>                 
+         <label for="nombre">Nombre</label> 
+       <input name="nombre" type="text" id="nombre" onfocus="restaurar()"/>
+    </div>
+    <div>
+      <label for="contrasena">Contraseña</label>
+        <input name="password" type="password" id="contrasena" onfocus="restaurar()" />
+     </div>
+          <div>
+                
+                <p>
+        <input type="submit" value="ingresar" >                              
+                
+                </p>
+                <p></p>
+          </div>
+              <p id="aviso"></p>
+
+</fieldset>
+
+</form>
+
+</center>
+<!--termina el formulario-->        
+    </login>
+  </header>
+
+<!---seccion donde se modificara su contenido-->
+  <article class="contenidodelarticulo" id="contenidodelarticulo" align="">
+    
+    <div class="titulodelaBusqueda" id="busqueda"> SILLAS </div>
+
+    <div ><a href="catalogo.html">VOLVER AL CATALOGO</a></div>
+    <!--declaro un contenedor donde estara las tablas dentro sirve para dar color a traves de css-->    
+      <div class="tablacatalogos" id="tablaconfotos">
+    <!--tabla donde se inciia para modelar fotos-->
+    
+    
+    <!--tabla donde se inciia para modelar fotos-->
+   <table width="200" heigth="200" border="1" align="" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td style="text-align: center"><p><img src="../internet/imagenes/silla.jpg" width=100%>
+              <div id="botonderecho" >
+              <form action="catalogo_mesas.html">
+                  <input  type="submit"  value="<-----" /> </form>
+               <form action="catalogo_maceteros.html">
+                  <input class="boton" type="submit" value="----->" /> </form>
+              </div>
+
+              <p>
+                   
+                  <form ><input id="comentario" type="text" size="50"  name="comentario"  placeholder="Escriba aquí su comentario" 
+                   onblur="if(this.value=='' || this.value='Escriba aqui su comentario') "              
+                   onfocus="if(this.value=='Escriba acá su comentario') this.value=''" >
+                    <br></form>
+                  <input type="submit" value="Ingresar comentario" onclick="validaComentario()" />
+
+              </p>
+              </p>
+              </td>
+            </tr>
+          </tbody>
+          </table>
+    
+       </div>
+
+  </article>
+  <!--termina el cuerpo del articulo -->
+</div>
+<!--tabla de comentarios-->
+
+
+<!--se declara el contenedor para pie de pagina-->
+<div class="piepagina" id="piepagina" align="center">DERECHOS RESERVADOS UDC 2016</div>
+
+</body>
+</html>

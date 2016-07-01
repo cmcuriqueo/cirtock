@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>producto</title>
+    	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <script language="JavaScript" src="miJavaScript.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../../index/bootstrap/css/bootstrap.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../index/bootstrap/css/bootstrap-responsive.css">
+         <style type="text/css">
+              label.error {
+                color: red;
+              }
+        </style>
+
+        <script src="../../index/js/validacion/lib/jquery.js"></script>
+        <script src="../../index/js/validacion/dist/jquery.validate.js"></script>
+
+        <script type="text/javascript">
+            $().ready(function(){
+                $("#f_producto").validate({
+                    rules: {
+                        nombre: {
+                            required: true,
+                            minlength: 4,
+                            maxlength: 20
+                        },
+                        descripcion: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 50
+                        },
+                        l_herramientas: {
+                            required: true,
+                            minlength: 5,
+                            maxlength: 50
+                        },
+                        l_insumos: {
+                            required: true,
+                            minlength: 5,
+                            maxlength: 50
+                        }
+                    },
+                    messages: {
+                        nombre: {
+                           required: "Campo obligatorio",
+                           minlength: "Longitud minima 4 carácteres",
+                           maxlength: "Longitud maxima 20 carácteres"
+                        },
+                        descripcion: {
+                           required: "Campo obligatorio",
+                           minlength: "Longitud minima 3 carácteres",
+                           maxlength: "Longitud maxima 50 carácteres"
+                        },
+                        l_herramientas: {
+                           required: "Campo obligatorio",
+                           minlength: "Longitud minima 5 carácteres",
+                           maxlength: "Longitud maxima 50 carácteres"
+                        },
+                        l_insumos: {
+                           required: "Campo obligatorio",
+                           minlength: "Longitud minima 5 carácteres",
+                           maxlength: "Longitud maxima 50 carácteres"
+                        }
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span4">
+                    <legend align="center">Modificaci&oacute;n de Producto</legend>
+                    <form class="form-horizontal" role="form" id="f_producto" method="get" action="../html/producto.html">
+                        <div class="form-group">
+                            <label for="nombre">Nombre de Producto</label>
+                            <input id="nombre" name="nombre" type="text"  value="Mesa">
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripci&oacute;n</label>
+                            <input id="descripcion" name="descripcion" type="text" value="sin descripcion..">
+                        </div>
+                        <div class="form-group">
+                            <label>Adjunto</label>
+                            <label class="btn btn-info btn-file">
+                                Examinar<input type="file" style="display: none;">
+                            </label>
+                        </div>
+                        <br><br>
+                        <input class="btn btn-info" type="button" onclick="confirmar()" value="Cancelar">
+                        <input class="btn btn-info" type="submit" value="Guardar">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
