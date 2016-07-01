@@ -1,4 +1,4 @@
-package ar.edu.udc.cirtock.view;
+package ar.edu.udc.cirtock.view.intranet.negocio;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,6 +17,7 @@ import org.apache.wicket.validation.ValidationError;
 import ar.edu.udc.cirtock.db.CirtockConnection;
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Herramienta;
+import ar.edu.udc.cirtock.view.intranet.html.HerramientaPage;
 
 public class FormularioHerramienta extends WebPage{
 	private static final long serialVersionUID = 1L;
@@ -69,21 +70,24 @@ public class FormularioHerramienta extends WebPage{
 					String nomb = (String)nombre.getModelObject();
 					Integer cant = cantidad.getModelObject();
 
-					Connection conn;
+					Connection conn = null;
 					try {
-						conn = CirtockConnection.getConexion("cirtock", "cirtock", "cirtock");
+
+						conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
 						Herramienta hc = new Herramienta();
 						hc.setDescripcion(desc);
 						hc.setNombre(nomb);
 						hc.setCantidad(cant);
 						hc.insert("", conn);
 
-					} catch (SQLException e) {
-						System.out.println("Error al acceder a la base de datos");
 					} catch (CirtockException e) {
-						
+						System.out.println("Error al acceder a la base de datos");						
+					} finally {
+						try {
+							conn.close();
+						} catch (SQLException e) { ; }						
 					}
-					
+
 				} catch(NumberFormatException e){
 					System.err.println("Error");
 				}

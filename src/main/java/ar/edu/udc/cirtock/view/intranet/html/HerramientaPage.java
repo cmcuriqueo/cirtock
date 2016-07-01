@@ -1,4 +1,4 @@
-package ar.edu.udc.cirtock.view;
+package ar.edu.udc.cirtock.view.intranet.html;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,7 +12,9 @@ import org.apache.wicket.markup.html.list.ListView;
 
 import ar.edu.udc.cirtock.db.CirtockConnection;
 import ar.edu.udc.cirtock.db.Consultas;
+import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Herramienta;
+import ar.edu.udc.cirtock.view.intranet.negocio.FormularioHerramienta;
 
 public class HerramientaPage extends WebPage{
 
@@ -26,13 +28,14 @@ public class HerramientaPage extends WebPage{
 		
 		Connection conn;
 		try {
-			conn = CirtockConnection.getConexion("cirtock", "cirtock", "cirtock");
+			conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
 			String patronDescripcion="";
 			Integer patronCantidad=null;
 			String patronNombre= "";
 			herramientas = Consultas.obtenerHerramientas(conn, patronDescripcion, patronNombre, patronCantidad);
-		} catch (SQLException e) {
+		} catch (CirtockException e) {
 			
+			System.out.println(e.getMessage());
 		}
 		
 		

@@ -4,7 +4,8 @@ import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.edu.udc.cirtock.view.FormularioHerramienta;
+import ar.edu.udc.cirtock.view.intranet.html.*;
+import ar.edu.udc.cirtock.view.intranet.negocio.FormularioHerramienta;
 import ar.edu.udc.cirtock.view.WicketApplication;
 
 /**

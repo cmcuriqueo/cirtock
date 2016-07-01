@@ -93,11 +93,6 @@
 		</dependency>
                 
                 <!--  JDBC DEPENDENCIES FOR POSTGRESQL  -->
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>postgresql</artifactId>
-                    <version>9.3-1103-jdbc3</version>
-                </dependency>
 	</dependencies>
 	<build>
 		<resources>
