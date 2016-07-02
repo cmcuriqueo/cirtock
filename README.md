@@ -1,13 +1,14 @@
 # cirtock
 ## Para conexión a la base de datos
 Agregar al repositorio maven de sus pc la dependecia postgresql-9.3-1103.jdbc3 para la coneccion a postgres.
+```
 	-Es necesario tener [maven](https://maven.apache.org/) instalados en pas pc.
 	1- Ubicar el jar postgresql-9.3-1103.jdbc3 que se encuentra en \src\main\webapp\WEB-INF\Libraries ruta del proyecto a un ruta copiarlo a una ruta, copiarlo a una ruta de facil acceso desde la consola, yo copie por ejemplo en mi carpeta personal.
 	2- Abrir una consola y agregar el siguiente comando: 
 	mvn install:install-file -Dfile="C:\Users\Usuario\postgresql-9.3-1103.jdbc3.jar" -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=9.3-1103.jdbc3 -Dpackaging=jar
 
 	-Dfile: Correponde a la ruta donde esta el archivo postgresql-9.3-1103.jdbc3.jar
- 
+``` 
 	 
 ## Para la base de datos cirtock:
 
