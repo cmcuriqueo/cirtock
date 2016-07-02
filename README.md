@@ -20,8 +20,6 @@ BEGIN TRANSACTION;
 
 CREATE SCHEMA cirtock;
 
-CREATE DATABASE cirtock.cirtock;
-
 GRANT USAGE ON SCHEMA cirtock TO GROUP cirtock;
 
 CREATE SEQUENCE cirtock.seq_herramienta;
