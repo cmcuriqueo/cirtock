@@ -31,28 +31,28 @@
 				<div class="span2">
 					<ul class="nav nav-list">
 						<li class="nav-header">Administraci&oacute;n</li>
-						<li><a href="producto.html">Productos</a></li>
-						<li class="active"><a href="">Herramientas</a></li>
-						<li><a href="InsumoPage.html">Insumos</a></li>
-						<li><a href="catalogo.html">Catalogo</a></li>
-						<li><a href="usuarios.html">Usuarios</a></li>
+						<li><a href="#" wicket:id="producto">Productos</a></li>
+						<li><a href="#" wicket:id="herramienta">Herramientas</a></li>
+						<li class="active"><a href="#">Insumos</a></li>
+						<li><a href="#">Catalogo</a></li>
+						<li><a href="#">Usuarios</a></li>
 				    </ul>
 				</div>
 				<div class="span10">
-                                    <table class="table">
+                	<table class="table">
 	    				<tr>
-						<th>Nombre</th>
-						<th>Descripcion</th>
-                                                <th>Cantidad</th>
+							<th>Nombre</th>
+							<th>Descripcion</th>
+	                        <th>Cantidad</th>
 	    				</tr>
 	    				<tr wicket:id="lista">
-                                                <td><span wicket:id="nombre"></span></td>
-                                                <td><span wicket:id="descripcion"></span></td>
-                                                <td><span wicket:id="cantidad"></span></td>
-                                                <td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
-                                                <td><a href="../negocio/mherramienta.html" class="btn btn-info">Modificar</a></td>
-					</tr>
-                                    </table>
+	                        <td><span wicket:id="nombre"></span></td>
+	                        <td><span wicket:id="descripcion"></span></td>
+	                        <td><span wicket:id="cantidad"></span></td>
+	                        <td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
+	                        <td><a href="../negocio/mherramienta.html" class="btn btn-info">Modificar</a></td>
+						</tr>
+                    </table>
 				</div>
 			</div>
 			<div class="text-center">

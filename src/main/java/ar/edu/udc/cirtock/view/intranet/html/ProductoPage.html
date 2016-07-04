@@ -42,63 +42,34 @@
 					<ul class="nav nav-list">
 						<li class="nav-header">Administraci&oacute;n</li>
 						<li class="active"><a href="#">Productos</a></li>
-						<li><a href="herramienta.html">Herramientas</a></li>
-						<li><a href="InsumoPage.html">Insumos</a></li>
-						<li><a href="catalogo.html">Catalogo</a></li>
-						<li><a href="usuarios.html">Usuarios</a></li>
+						<li><a href="#" wicket:id="herramienta">Herramientas</a></li>
+						<li><a href="#" wicket:id="insumo">Insumos</a></li>
+						<li><a href="#">Catalogo</a></li>
+						<li><a href="#">Usuarios</a></li>
 				    </ul>
 				</div>
 				<div class="span10">
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-			    				<tr>
-									<th>Nombre</th>
-									<th>Descripcion</th>
-									<th>Imagen</th>
-			    				</tr>
-			    			</thead>
-			    			<tbody>
-			    				<tr>
-									<td>Mesa</td>
-									<td>sin descripcion...</td>
-									<td>imagenes/mesa.png</td>
-									<td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
-									<td><a href="../negocio/mproducto.html" class="btn btn-info">Modificar</a></td>
-									<td><a href="../negocio/agregado/agregar-insumo.html" class="btn btn-info">Insimos</a></td>
-									<td><a href="../negocio/agregado/agregar-herramienta.html" class="btn btn-info">Herramientas</a></td>
-								</tr>
-			    				<tr>
-			    					<td>Silla</td>
-			    					<td>sin descripcion...</td>
-			    					<td>imagenes/silla.png</td>
-									<td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
-									<td><a href="" class="btn btn-info">Modificar</a></td>
-									<td><a href="" class="btn btn-info">Insimos</a></td>
-									<td><a href="" class="btn btn-info">Herramientas</a></td>
-			    				</tr>
-			    				<tr>
-			    					<td>Estante</td>
-									<td>sin descripcion...</td>
-									<td>imagenes/estante.png</td>
-									<td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
-									<td><a href="" class="btn btn-info">Modificar</a></td>
-									<td><a href="" class="btn btn-info">Insimos</a></td>
-									<td><a href="" class="btn btn-info">Herramientas</a></td>
-			    				</tr>
-			    			</tbody>
-		    			</table>
-		    		</div>
+                	<table class="table">
+	    				<tr>
+							<th>Nombre</th>
+							<th>Descripcion</th>
+	    				</tr>
+	    				<tr wicket:id="lista">
+	                        <td><span wicket:id="nombre"></span></td>
+	                        <td><span wicket:id="descripcion"></span></td>
+	                        <td><button class="btn btn-info" onclick="eliminar();">Eliminar</button></td>
+	                        <td><a href="../negocio/mherramienta.html" class="btn btn-info">Modificar</a></td>
+						</tr>
+                    </table>
 				</div>
 			</div>
 			<div class="text-center">
 				<div class="row-fluid">
 					<div class="span12">
-						<a href="../negocio/cproducto.html" class="btn btn-info">Crear</a>
+						<a href="#" wicket:id="nuevo" class="btn btn-info">Crear</a>
 					</div>
 				</div>
-			</div>
-			<br>
+			</div><br>
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="text-center">

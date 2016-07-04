@@ -28,6 +28,7 @@ import ar.edu.udc.cirtock.db.CirtockConnection;
 import ar.edu.udc.cirtock.db.Consultas;
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Insumo;
+import ar.edu.udc.cirtock.view.intranet.negocio.FormularioHerramienta;
 import ar.edu.udc.cirtock.view.intranet.negocio.FormularioInsumo;
 /**
  *
@@ -43,6 +44,30 @@ public class InsumoPage extends WebPage {
 	@SuppressWarnings("unchecked")
 	public InsumoPage() {
 		
+	    add(new Link<ProductoPage>("producto") {
+	          /**
+			 * 
+			 */
+	    	private static final long serialVersionUID = 1L;
+
+			@Override
+		    public void onClick() {
+				setResponsePage(ProductoPage.class);
+		    }
+	    });
+		
+	    add(new Link<HerramientaPage>("herramienta") {
+	          /**
+			 * 
+			 */
+	    	private static final long serialVersionUID = 1L;
+
+			@Override
+		    public void onClick() {
+				setResponsePage(HerramientaPage.class);
+		    }
+	    });
+	    
 		Connection conn;
 		try {
 			conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");

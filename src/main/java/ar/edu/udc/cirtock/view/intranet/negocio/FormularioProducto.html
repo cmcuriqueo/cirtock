@@ -70,30 +70,32 @@
     </script>
 </head>
     <body>
-    <div class="container">
-        <div class="row-fluid">
-            <div class="span4">
-                <legend align="center">Creacion de Producto</legend>
-                <form class="form-horizontal" role="form" id="f_producto" method="get" action="../html/producto.html">
-                    <div class="form-group">
-                        <label for="nombre">Nombre de Producto</label>
-                        <input id="nombre" name="nombre" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcion">Descripci&oacute;n</label>
-                        <input id="descripcion" name="descripcion" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label>Adjunto</label>
-                        <label class="btn btn-info btn-file">
-                            Examinar<input type="file" style="display: none;">
-                        </label>
-                    </div>
-                    <br><br>
-                    <button class="btn btn-info" onclick="confirmar()">Cancelar</button>
-                    <input type="submit" class="btn btn-info" value="Guardar">
-                </fieldset>
-            </form>
-        </div>
-    </body>
+	    <div class="container">
+	        <div class="row-fluid">
+	            <div class="span4">
+	            	<div style="color:red" wicket:id="feedbackErrors"></div>
+	                <form wicket:id="formulario_producto"class="form-horizontal" role="form" id="f_producto" method="get" action="../html/producto.html">
+	                    <legend align="center">Creacion de Producto</legend>
+	                    <div class="form-group">
+	                        <label for="nombre">Nombre de Producto</label>
+	                        <input wicket:id="nombre" id="nombre" name="nombre" type="text">
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="descripcion">Descripci&oacute;n</label>
+	                        <input wicket:id="descripcion" id="descripcion" name="descripcion" type="text">
+	                    </div>
+	                    <div class="form-group">
+	                        <label>Adjunto</label>
+	                        <label class="btn btn-info btn-file">
+	                            Examinar<input type="file" style="display: none;">
+	                        </label>
+	                    </div>
+	                    <br><br>
+	                    <button class="btn btn-info" onclick="confirmar()">Cancelar</button>
+	                    <input wicket:id="enviar" type="submit" class="btn btn-info" value="Guardar">
+	            	</form>
+	            </div>
+	        </div>
+	    </div>
+	</body>
 </html>

@@ -19,8 +19,10 @@ import ar.edu.udc.cirtock.db.CirtockConnection;
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Insumo;
 import ar.edu.udc.cirtock.view.intranet.html.InsumoPage;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import org.apache.wicket.feedback.ExactLevelFeedbackMessageFilter;
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.markup.html.WebPage;
@@ -28,6 +30,7 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -50,7 +53,8 @@ public class FormularioInsumo extends WebPage {
 	public FormularioInsumo(final PageParameters parameters) {
 		
 		super(parameters);
-		 add(new FeedbackPanel("feedbackErrors", new ExactLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
+		
+		add(new FeedbackPanel("feedbackErrors", new ExactLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
 		formulario = new Form("formulario_insumo");
 		
                 nombre = new RequiredTextField<String>("nombre", new Model());

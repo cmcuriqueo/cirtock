@@ -3,13 +3,16 @@ package ar.edu.udc.cirtock.view.intranet.negocio;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.feedback.ExactLevelFeedbackMessageFilter;
+import org.apache.wicket.feedback.FeedbackMessage;
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.markup.html.form.NumberTextField;
+import org.apache.wicket.markup.html.form.RequiredTextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.IValidator;
 import org.apache.wicket.validation.ValidationError;
@@ -17,24 +20,22 @@ import org.apache.wicket.validation.ValidationError;
 import ar.edu.udc.cirtock.db.CirtockConnection;
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Herramienta;
+import ar.edu.udc.cirtock.model.Producto;
 import ar.edu.udc.cirtock.view.intranet.html.HerramientaPage;
-import org.apache.wicket.feedback.ExactLevelFeedbackMessageFilter;
-import org.apache.wicket.feedback.FeedbackMessage;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import ar.edu.udc.cirtock.view.intranet.html.ProductoPage;
 
-public class FormularioHerramienta extends WebPage{
+public class FormularioProducto extends WebPage{
 	private static final long serialVersionUID = 1L;
 	private Form formulario;
 	private RequiredTextField<String> descripcion;
 	private RequiredTextField<String> nombre;
-	private NumberTextField<Integer> cantidad;
         
 	
-	public FormularioHerramienta(final PageParameters parameters) {
+	public FormularioProducto(final PageParameters parameters) {
 		
 		super(parameters);
 		add(new FeedbackPanel("feedbackErrors", new ExactLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
-		formulario = new Form("formulario_herramienta");
+		formulario = new Form("formulario_producto");
 		
                 nombre = new RequiredTextField<String>("nombre", new Model());
                 
@@ -50,7 +51,7 @@ public class FormularioHerramienta extends WebPage{
                     }
                     
                 });
-		formulario.add(nombre);
+                formulario.add(nombre);
                 
                 descripcion = new RequiredTextField<String>("descripcion", new Model());
 		              
@@ -67,57 +68,38 @@ public class FormularioHerramienta extends WebPage{
             
                 });
                 formulario.add(descripcion);
-                
-                cantidad = new NumberTextField<Integer>("cantidad", new Model());
-                cantidad.setType(Integer.class);
-                cantidad.add(new IValidator<Integer>(){
-                    @Override
-                    public void validate(IValidatable<Integer> validatable) {
-                         Integer cantidad = validatable.getValue();
-                         if(cantidad < 0){
-                            ValidationError error = new ValidationError();
-                            error.setMessage("El campo 'cantidad' no es valido");
-                            validatable.error(error);
-                         }
-                    }                    
-                });
-                
-                formulario.add(cantidad);
 
+				formulario.add(new Button("enviar"){
+					
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 		
-		formulario.add(new Button("enviar"){
-			
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			public void onSubmit() {
-				String desc = (String)descripcion.getModelObject();
-				String nomb = (String)nombre.getModelObject();
-				Integer cant = cantidad.getModelObject();
-				Connection conn = null;
-				try {
-
-					conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
-					Herramienta hc = new Herramienta();
-					hc.setDescripcion(desc);
-					hc.setNombre(nomb);
-					hc.setCantidad(cant);
-					hc.insert("", conn);
-
-				} catch (CirtockException e) {
-					System.out.println("Error al acceder a la base de datos");						
-				} finally {
-					try {
-						conn.close();
-					} catch (SQLException e) { ; }						
-				}
-				setResponsePage(HerramientaPage.class);
-			};
-		});
+					public void onSubmit() {
+						String desc = (String)descripcion.getModelObject();
+						String nomb = (String)nombre.getModelObject();
+						Connection conn = null;
+						try {
 		
-		add(formulario);
+							conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
+							Producto pro = new Producto();
+							pro.setDescripcion(desc);
+							pro.setNombre(nomb);
+							pro.insert("", conn);
+		
+						} catch (CirtockException e) {
+							System.out.println("Error al acceder a la base de datos");						
+						} finally {
+							try {
+								conn.close();
+							} catch (SQLException e) { ; }						
+						}
+						setResponsePage(ProductoPage.class);
+					};
+				});
+				
+				add(formulario);
         };
-        
+
 }

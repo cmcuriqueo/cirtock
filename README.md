@@ -56,6 +56,8 @@ CREATE TABLE cirtock.insumo (
    CONSTRAINT pk_insumo
      PRIMARY KEY (id)
 );
+GRANT SELECT, UPDATE ON SEQUENCE cirtock.seq_insumo TO cirtock;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE cirtock.insumo TO cirtock;
 
 GRANT SELECT, UPDATE ON SEQUENCE cirtock.seq_herramienta TO cirtock;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE cirtock.herramienta TO cirtock;

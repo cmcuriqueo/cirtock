@@ -12,41 +12,36 @@ import org.apache.wicket.markup.html.list.ListView;
 import ar.edu.udc.cirtock.db.CirtockConnection;
 import ar.edu.udc.cirtock.db.Consultas;
 import ar.edu.udc.cirtock.exception.CirtockException;
-import ar.edu.udc.cirtock.model.Herramienta;
+import ar.edu.udc.cirtock.model.Producto;
 import ar.edu.udc.cirtock.view.intranet.negocio.FormularioHerramienta;
 import ar.edu.udc.cirtock.view.intranet.negocio.FormularioProducto;
 
-public class HerramientaPage extends WebPage{
-
-	/**
-	 * 
-	 */
+public class ProductoPage extends WebPage {
 	private static final long serialVersionUID = 1L;
-	public LinkedList<Herramienta> herramientas;
-	@SuppressWarnings("unchecked")
-	public HerramientaPage() {
-		
-	    add(new Link<ProductoPage>("producto") {
-	          /**
-			 * 
-			 */
-	    	private static final long serialVersionUID = 1L;
-
-			@Override
-		    public void onClick() {
-				setResponsePage(ProductoPage.class);
-		    }
-	    });
+	public LinkedList<Producto> productos;
+	
+	public ProductoPage() {
 		
 	    add(new Link<InsumoPage>("insumo") {
 	          /**
 			 * 
 			 */
-	    	private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1L;
 
 			@Override
 		    public void onClick() {
 				setResponsePage(InsumoPage.class);
+		    }
+	    });
+	    add(new Link<HerramientaPage>("herramienta") {
+	          /**
+			 * 
+			 */
+		private static final long serialVersionUID = 1L;
+
+			@Override
+		    public void onClick() {
+				setResponsePage(HerramientaPage.class);
 		    }
 	    });
 	    
@@ -56,30 +51,24 @@ public class HerramientaPage extends WebPage{
 			String patronDescripcion="";
 			Integer patronCantidad=null;
 			String patronNombre= "";
-			herramientas = Consultas.obtenerHerramientas(conn, patronDescripcion, patronNombre, patronCantidad);
+			productos = Consultas.obtenerProductos(conn, patronDescripcion, patronNombre, patronCantidad);
 		} catch (CirtockException e) {
-			
 			System.out.println(e.getMessage());
 		}
-		
-		
-		add(new ListView("lista", herramientas) {
 
-			/**
-			 * 
-			 */
+		add(new ListView("lista", productos) {
+
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void populateItem(ListItem item) {
-		        Herramienta herramienta = (Herramienta) item.getModelObject();
-		        item.add(new Label("nombre", herramienta.getNombre()));
-		        item.add(new Label("descripcion", herramienta.getDescripcion()));
-		        item.add(new Label("cantidad", herramienta.getCantidad()));
+				Producto producto = (Producto) item.getModelObject();
+		        item.add(new Label("nombre", producto.getNombre()));
+		        item.add(new Label("descripcion", producto.getDescripcion()));
 			}
 		});
 		
-	    add(new Link<FormularioHerramienta>("nuevo") {
+	    add(new Link<FormularioProducto>("nuevo") {
 	    /**
 	     * 
 	     */
@@ -87,9 +76,8 @@ public class HerramientaPage extends WebPage{
 	
 				@Override
 			    public void onClick() {
-					setResponsePage(FormularioHerramienta.class);
+					setResponsePage(FormularioProducto.class);
 			    }
 	    });
-
 	}
 }

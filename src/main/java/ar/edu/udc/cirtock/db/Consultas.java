@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import ar.edu.udc.cirtock.model.Herramienta;
 import ar.edu.udc.cirtock.model.Insumo;
+import ar.edu.udc.cirtock.model.Producto;
 
 public class Consultas {
 	
@@ -72,4 +73,33 @@ public class Consultas {
 		
 		return insumos;    
     }
+    public static LinkedList<Producto> obtenerProductos(Connection conn, String patronDescripcion, String patronNombre, Integer patronCantidad){
+		LinkedList<Producto> productos = new LinkedList<>();
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT");
+		query.append("  p.id,");
+		query.append("  p.nombre,");
+		query.append("  p.descripcion,");
+		query.append("FROM");
+		query.append("  cirtock.producto p");
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while (rs.next()) {
+				Producto nueva = new Producto();
+				nueva.setId(rs.getInt("id"));
+				nueva.setNombre(rs.getString("nombre"));
+				nueva.setDescripcion(rs.getString("descripcion"));
+				productos.add(nueva);
+			} 
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return productos;
+    }
+    
 }
