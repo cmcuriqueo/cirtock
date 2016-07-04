@@ -1,7 +1,6 @@
 package ar.edu.udc.cirtock.view.intranet.html;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.LinkedList;
 
 import org.apache.wicket.markup.html.WebPage;

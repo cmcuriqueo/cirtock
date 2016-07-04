@@ -2,7 +2,7 @@
 ## Para conexión a la base de datos
 Agregar al repositorio maven de sus pc la dependecia postgresql-9.3-1103.jdbc3 para la coneccion a postgres.
 ```
-	-Es necesario tener [maven](https://maven.apache.org/) instalados en pas pc.
+	-Es necesario tener [maven](https://maven.apache.org/) instalados en sus pc.
 	1- Ubicar el jar postgresql-9.3-1103.jdbc3 que se encuentra en \src\main\webapp\WEB-INF\Libraries ruta del proyecto a un ruta copiarlo a una ruta, copiarlo a una ruta de facil acceso desde la consola, yo copie por ejemplo en mi carpeta personal.
 	2- Abrir una consola y agregar el siguiente comando: 
 	mvn install:install-file -Dfile="C:\Users\Usuario\postgresql-9.3-1103.jdbc3.jar" -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=9.3-1103.jdbc3 -Dpackaging=jar
@@ -24,13 +24,12 @@ CREATE SCHEMA cirtock;
 GRANT USAGE ON SCHEMA cirtock TO GROUP cirtock;
 
 CREATE SEQUENCE cirtock.seq_herramienta;
-
 CREATE TABLE cirtock.herramienta (
 	id             integer
-                 not null
-                 default nextval('cirtock.seq_herramienta'),
+                   not null
+                   default nextval('cirtock.seq_herramienta'),
 	nombre         text
-                 not null,
+                   not null,
     descripcion    text
                    not null,
     cantidad       integer
@@ -38,6 +37,23 @@ CREATE TABLE cirtock.herramienta (
                    check(cantidad >= 0),
  
    CONSTRAINT pk_herramienta
+     PRIMARY KEY (id)
+);
+
+CREATE SEQUENCE cirtock.seq_insumo;
+CREATE TABLE cirtock.insumo (
+	id             integer
+                   not null
+                   default nextval('cirtock.seq_insumo'),
+	nombre         text
+                   not null,
+    descripcion    text
+                   not null,
+    cantidad       integer
+                   not null
+                   check(cantidad >= 0),
+ 
+   CONSTRAINT pk_insumo
      PRIMARY KEY (id)
 );
 

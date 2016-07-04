@@ -18,6 +18,9 @@ import ar.edu.udc.cirtock.db.CirtockConnection;
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Herramienta;
 import ar.edu.udc.cirtock.view.intranet.html.HerramientaPage;
+import org.apache.wicket.feedback.ExactLevelFeedbackMessageFilter;
+import org.apache.wicket.feedback.FeedbackMessage;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 public class FormularioHerramienta extends WebPage{
 	private static final long serialVersionUID = 1L;
@@ -30,29 +33,54 @@ public class FormularioHerramienta extends WebPage{
 	public FormularioHerramienta(final PageParameters parameters) {
 		
 		super(parameters);
-				
+		 add(new FeedbackPanel("feedbackErrors", new ExactLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
 		formulario = new Form("formulario_herramienta");
 		
-		formulario.add(descripcion = new RequiredTextField<String>("descripcion", new Model()));
+                nombre = new RequiredTextField<String>("nombre", new Model());
                 
+                nombre.add(new IValidator<String>(){
+                    @Override
+                    public void validate(IValidatable<String> validatable) {
+                        String nombre = validatable.getValue().trim().toUpperCase();
+                        if(!nombre.matches("^\\w{3,20}$")){
+                            ValidationError error = new ValidationError();
+                            error.setMessage("El campo 'nombre' no es valido");
+                            validatable.error(error);
+                        }
+                    }
+                    
+                });
+		formulario.add(nombre);
+                
+                descripcion = new RequiredTextField<String>("descripcion", new Model());
+		              
                 descripcion.add(new IValidator<String>(){
                     @Override
                     public void validate(IValidatable<String> validatable) {
                         String descripcion = validatable.getValue().trim().toUpperCase();
-                        if(descripcion.matches("^\\w\\s")){
+                        if(!descripcion.matches("^\\w{3,50}$")){
                             ValidationError error = new ValidationError();
-                            error.setMessage("descripcion no valida");
+                            error.setMessage("El campo 'descripcion' no es valido");
                             validatable.error(error);
                         }
-                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
             
                 });
-                
-		formulario.add(nombre = new RequiredTextField<String>("nombre", new Model()));
+                formulario.add(descripcion);
                 
                 cantidad = new NumberTextField<Integer>("cantidad", new Model());
                 cantidad.setType(Integer.class);
+                cantidad.add(new IValidator<Integer>(){
+                    @Override
+                    public void validate(IValidatable<Integer> validatable) {
+                         Integer cantidad = validatable.getValue();
+                         if(cantidad < 0){
+                            ValidationError error = new ValidationError();
+                            error.setMessage("El campo 'cantidad' no es valido");
+                            validatable.error(error);
+                         }
+                    }                    
+                });
                 
                 formulario.add(cantidad);
 
@@ -65,31 +93,25 @@ public class FormularioHerramienta extends WebPage{
 			private static final long serialVersionUID = 1L;
 
 			public void onSubmit() {
+				String desc = (String)descripcion.getModelObject();
+				String nomb = (String)nombre.getModelObject();
+				Integer cant = cantidad.getModelObject();
+				Connection conn = null;
 				try {
-					String desc = (String)descripcion.getModelObject();
-					String nomb = (String)nombre.getModelObject();
-					Integer cant = cantidad.getModelObject();
 
-					Connection conn = null;
+					conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
+					Herramienta hc = new Herramienta();
+					hc.setDescripcion(desc);
+					hc.setNombre(nomb);
+					hc.setCantidad(cant);
+					hc.insert("", conn);
+
+				} catch (CirtockException e) {
+					System.out.println("Error al acceder a la base de datos");						
+				} finally {
 					try {
-
-						conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
-						Herramienta hc = new Herramienta();
-						hc.setDescripcion(desc);
-						hc.setNombre(nomb);
-						hc.setCantidad(cant);
-						hc.insert("", conn);
-
-					} catch (CirtockException e) {
-						System.out.println("Error al acceder a la base de datos");						
-					} finally {
-						try {
-							conn.close();
-						} catch (SQLException e) { ; }						
-					}
-
-				} catch(NumberFormatException e){
-					System.err.println("Error");
+						conn.close();
+					} catch (SQLException e) { ; }						
 				}
 				setResponsePage(HerramientaPage.class);
 			};

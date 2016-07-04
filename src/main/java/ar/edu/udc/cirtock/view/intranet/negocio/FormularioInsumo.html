@@ -63,30 +63,31 @@
     <div class="container">
         <div class="row-fluid">
             <div class="span4">
-                <legend align="center">Dar de alta Insumo</legend>
-                <form class="form-horizontal" role="form" id="f_insumo" method="get" action="../html/insumo.html">
-                        <div class="form-group">
-                            <label for="nombre">Nombre de Insumo</label>
-                            <input id="nombre" name="nombre" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label for="descripcion">Descripci&oacute;n</label>
-                            <input id="descripcion" name="descripcion" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label for="cantidad">Cantidad</label>
-                            <input id="cantidad" name="cantidad" type="number" min="1">
-                        </div>
-                        <div class="form-group">
-                            <label>Adjunto</label>
-                            <label class="btn btn-info btn-file">
-                                Examinar<input type="file" style="display: none;">
-                            </label>
-                        </div>
-                        <br><br>
-                        <input class="btn btn-info" type="button" onclick="confirmar()" value="Cancelar">
-                        <input class="btn btn-info" type="submit" value="Guardar">
-                    </fieldset>
+               <div style="color:red" wicket:id="feedbackErrors"></div>
+                <form wicket:id="formulario_insumo" class="form-horizontal" role="form" id="f_herramienta" method="get" action="../html/herramienta.html"> 
+                    <legend align="center">Dar de alta Insumo</legend>  
+                    <div class="form-group">
+                        <label for="nombre">Nombre de Insumo</label>
+                        <input wicket:id="nombre" name="nombre" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripci&oacute;n</label>
+                        <input wicket:id="descripcion" id="descripcion" name="descripcion" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input wicket:id="cantidad" id="cantidad" name="cantidad" type="number" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Adjunto</label>
+                        <label class="btn btn-info btn-file">
+                            Examinar<input type="file" style="display: none;">
+                        </label>
+                    </div> 
+                    <br>
+                    <br>
+                    <input class="btn btn-info" type="button" onclick="confirmar()" value="Cancelar">
+                    <input wicket:id="enviar" type="submit" class="btn btn-info" value="Guardar">
                 </form>
             </div>
         </div>

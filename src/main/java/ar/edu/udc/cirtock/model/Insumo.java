@@ -51,7 +51,7 @@ public class Insumo {
     public Integer getCantidad() {
         return cantidad;
     }
-
+    
     public void setId(Integer id) {
         this.id = id;
     }

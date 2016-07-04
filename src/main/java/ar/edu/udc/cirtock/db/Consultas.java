@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import ar.edu.udc.cirtock.model.Herramienta;
+import ar.edu.udc.cirtock.model.Insumo;
 
 public class Consultas {
 	
@@ -40,4 +41,35 @@ public class Consultas {
 		
 		return herramientas;
 	}
+
+    public static LinkedList<Insumo> obtenerInsumos(Connection conn, String patronDescripcion, String patronNombre, Integer patronCantidad) {
+		LinkedList<Insumo> insumos = new LinkedList<>();
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT");
+		query.append("  i.id,");
+		query.append("  i.nombre,");
+		query.append("  i.descripcion,");
+		query.append("  i.cantidad ");
+		query.append("FROM");
+		query.append("  cirtock.insumo i");
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while (rs.next()) {
+				Insumo nueva = new Insumo();
+				nueva.setId(rs.getInt("id"));
+				nueva.setNombre(rs.getString("nombre"));
+				nueva.setDescripcion(rs.getString("descripcion"));
+				nueva.setCantidad(rs.getInt("cantidad"));
+				insumos.add(nueva);
+			} 
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return insumos;    
+    }
 }
