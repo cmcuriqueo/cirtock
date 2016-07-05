@@ -25,6 +25,7 @@ import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Herramienta;
 import ar.edu.udc.cirtock.model.Usuario;
 import ar.edu.udc.cirtock.view.intranet.html.HerramientaPage;
+import ar.edu.udc.cirtock.view.intranet.html.ProductoPage;
 
 
 
@@ -98,7 +99,7 @@ public class maceta_busqueda extends WebPage {
 						conn.close();
 					} catch (SQLException e) { ; }						
 				}
-				setResponsePage(HerramientaPage.class);
+				setResponsePage(ProductoPage.class);
 			};
 		});
 		

@@ -25,42 +25,51 @@ GRANT USAGE ON SCHEMA cirtock TO GROUP cirtock;
 
 CREATE SEQUENCE cirtock.seq_herramienta;
 CREATE TABLE cirtock.herramienta (
-	id             integer
+    id             integer
                    not null
                    default nextval('cirtock.seq_herramienta'),
-	nombre         text
+    nombre         text
                    not null,
     descripcion    text
                    not null,
     cantidad       integer
                    not null
                    check(cantidad >= 0),
- 
+
    CONSTRAINT pk_herramienta
      PRIMARY KEY (id)
 );
 
 CREATE SEQUENCE cirtock.seq_insumo;
 CREATE TABLE cirtock.insumo (
-	id             integer
+    id             integer
                    not null
                    default nextval('cirtock.seq_insumo'),
-	nombre         text
+    nombre         text
                    not null,
     descripcion    text
                    not null,
     cantidad       integer
                    not null
                    check(cantidad >= 0),
- 
+
    CONSTRAINT pk_insumo
      PRIMARY KEY (id)
+);
+CREATE TABLE cirtock.usuario(
+  usuario text
+    not null,
+  password varchar[20]
+    not null
+
 );
 GRANT SELECT, UPDATE ON SEQUENCE cirtock.seq_insumo TO cirtock;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE cirtock.insumo TO cirtock;
 
 GRANT SELECT, UPDATE ON SEQUENCE cirtock.seq_herramienta TO cirtock;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE cirtock.herramienta TO cirtock;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE cirtock.usuario TO cirtock;
 
 END TRANSACTION;
 ```
