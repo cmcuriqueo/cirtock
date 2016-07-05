@@ -2,45 +2,46 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Busqueda Silla</title>
+<title>Busqueda silla</title>
 <link href="index/css/estilo.css" rel="stylesheet" type="text/css" />
-
 <script src="index/js/validacion/lib/jquery.js"></script>
 <script src="index/js/validacion/dist/jquery.validate.js"></script>
+<link rel="stylesheet" type="text/css" href="index/bootstrap/css/bootstrap.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="index/bootstrap/css/bootstrap-responsive.css">
 
 <script type="text/javascript">
-        
-       $().ready(function(){
+$().ready(function(){
 
-           $("#f_post").validate({
-               rules: {
-                   nombre: {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 20,
+    $("#f_usuario").validate({
+        rules: {
+            usuario: {
+                 required: true,
+                 minlength: 3,
+                 maxlength: 20,
 
-                   },
-                   password:{
-                       required: true,
-                       minlength: 3
-                   }
-               },
-               messages: {
-                   nombre: {
-                       required: "Campo obligatorio",
-                       minlength: "Longitud minima 3 carácteres",
-                       maxlength: "Longitud maxima 20 carácteres"
-                   },
-                   password : {
-                       required: "Campo obligatorio",
-                       minlength: "Longitud minima 3 carácteres"
-                       
-                   }
-               }
-            });
-        });
+            },
+            contrasenia:{
+                required: true,
+                minlength: 3
+            }
+        },
+        messages: {
+            usuario: {
+                required: "Campo obligatorio",
+                minlength: "Longitud minima 3 carácteres",
+                maxlength: "Longitud maxima 20 carácteres"
+            },
+            contrasenia : {
+                required: "Campo obligatorio",
+                minlength: "Longitud minima 3 carácteres"
+                
+            }
+        }
+     });
+ });
 
-    </script>
+</script>
 <style>
         #commentForm {
             width: 500px;
@@ -79,35 +80,32 @@
     
    
     <login><center>
-    <!--formulario de login que ya tiene el efecto-->  
-	<form id="f_post" method="get" action="../../intranet/html/producto.html"  >
-	<fieldset>				<!-- agrupa en un cuadro tendra color pero eso esta en css-->
+   <!--formulario de login que ya tiene el efecto-->  
+	<form wicket:id="f_usuario" role="form" id="f_usuario" method="get" action="../../intranet/html/producto.html"  >	<fieldset>				<!-- agrupa en un cuadro tendra color pero eso esta en css-->
   			
         <!--los divido en contendor para poder manipular con css-->		
-        <div>									
-		  	 <label for="nombre">Nombre</label>	
- 			 <input name="nombre" type="text" id="nombre"/>
+         <div>									
+		  	 <label for="usuario">Usuario</label>
+             <input wicket:id="usuario" name="usuario" type="text">
  		</div>
     <br>
  		<div>
- 		 	<label for="password">Contraseña</label>
-  			<input name="password" type="password" id="password"/>
+ 		 	<label for="contrasenia">Contrase&ntilde;a</label>
+  			<input wicket:id="contrasenia" name="constrasenia" type="text"/>
 		 </div>
 	   		  <div>
                 
                 <p>
-				<input type="submit" value="ingresar" >                              
+                <input wicket:id="Ingresar" type="submit" class="btn btn-info" value="Ingresar">                        
                 
                 </p>
                 <p></p>
 	   		  </div>
               <p></p>
-
+  
 </fieldset>
 
 </form>	   
-
-</form>
 
 </center>
 <!--termina el formulario-->	      
@@ -118,9 +116,10 @@
   </header>
 
 </div>
-
 <br/>
 <br/>
+<br>
+<br>
 <br>
 <br>
 	<center><iframe width="560" height="315" src="https://www.youtube.com/embed/45yOt0Ocswo" frameborder="0" allowfullscreen></iframe></center>
@@ -128,23 +127,29 @@
 	<!--tabla donde se van a mostrar las herramientas y los insumos-->
 	<table border="7" style="margin: 0 auto">
 		<form>
+			<table border="7" style="margin: 0 auto">
 				<tr>
-					<td><input type="checkbox"><img src="../imagenes/martillo.jpg"width="180" height="180"></td>
-					<td><input type="checkbox"><img src="../imagenes/cinta_metrica.jpg"width="180" height="180"></td>
-					<td><input type="checkbox"><img src="../imagenes/serrucho.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/martillo.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/cinta_metrica.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/serrucho.jpg"width="180" height="180"></td>
+					
+					
 				</tr>
 				<tr>
-					<td><input type="checkbox"><img src="../imagenes/tabla_madera.jpg"width="180" height="180"></td>
-					<td><input type="checkbox"><img src="../imagenes/clavos.jpg"width="180" height="180"></td>
-					<td><input type="checkbox"><img src="../imagenes/lija.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/tabla_madera.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/clavos.jpg"width="180" height="180"></td>
+					<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/lija.jpg"width="180" height="180"></td>
+					
+					
 				</tr>
+			</table>
 		</form>
 	</table>
 	<center>
 		<div>
 			<table border="7" bordercolor="green">
 				<tr>
-					<td><button><img src="../imagenes/confirmar.jpg" width="200" alt="Confirmar"></button></td>
+					<td><button><img src="index/imagenes/imagenesInternet/confirmar.jpg" width="200" alt="Confirmar"></button></td>
 				</tr>
 			
 			</table>
@@ -153,5 +158,5 @@
 <footer>
 		<p>DERECHOS RESERVADOS UDC 2016</p>
 	</footer>
-</body>
+</center></body>
 </html>

@@ -6,30 +6,33 @@
 <link href="index/css/estilo.css" rel="stylesheet" type="text/css" />
 <script src="index/js/validacion/lib/jquery.js"></script>
 <script src="index/js/validacion/dist/jquery.validate.js"></script>
-<script type="text/javascript">
-        
-       $().ready(function(){
+<link rel="stylesheet" type="text/css" href="index/bootstrap/css/bootstrap.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="index/bootstrap/css/bootstrap-responsive.css">
 
-           $("#f_post").validate({
+<script type="text/javascript">
+           $().ready(function(){
+
+           $("#f_usuario").validate({
                rules: {
-                   nombre: {
+                   usuario: {
                         required: true,
                         minlength: 3,
                         maxlength: 20,
 
                    },
-                   password:{
+                   contrasenia:{
                        required: true,
                        minlength: 3
                    }
                },
                messages: {
-                   nombre: {
+                   usuario: {
                        required: "Campo obligatorio",
                        minlength: "Longitud minima 3 carácteres",
                        maxlength: "Longitud maxima 20 carácteres"
                    },
-                   password : {
+                   contrasenia : {
                        required: "Campo obligatorio",
                        minlength: "Longitud minima 3 carácteres"
                        
@@ -77,24 +80,25 @@
     
    
     <login><center>
-    	<form id="f_post" method="get" action="../../intranet/html/producto.html"  >
+    	<div style="color:red" wicket:id="feedbackErrors"></div>
+    	<form wicket:id="f_usuario" role="form" id="f_usuario" method="get" action="../../intranet/html/producto.html"  >
     <!--formulario de login que ya tiene el efecto-->  
 		<fieldset>				<!-- agrupa en un cuadro tendra color pero eso esta en css-->
   			
         <!--los divido en contendor para poder manipular con css-->		
         <div>									
-		  	 <label for="nombre">Nombre</label>	
- 			 <input name="nombre" type="text" id="nombre"/>
+		  	 <label for="usuario">Usuario</label>
+             <input wicket:id="usuario" name="usuario" type="text">
  		</div>
     <br>
  		<div>
- 		 	<label for="password">Contraseña</label>
-  			<input name="password" type="password" id="password"/>
+ 		 	<label for="contrasenia">Contrase&ntilde;a</label>
+  			<input wicket:id="contrasenia" name="constrasenia" type="text"/>
 		 </div>
 	   		  <div>
                 
                 <p>
-				<input type="submit" value="ingresar" >                              
+                <input wicket:id="Ingresar" type="submit" class="btn btn-info" value="Ingresar">                        
                 
                 </p>
                 <p></p>
@@ -118,19 +122,21 @@
 <br/>
 <br>
 <br>
+<br>
+<br>
 <center><iframe width="560" height="315" src="https://www.youtube.com/embed/3W43O1UHNxE" frameborder="0" allowfullscreen></iframe></center>
 	
 	<!--tabla donde se van a mostrar las herramientas y los insumos-->
 	<table border="7" style="margin: 0 auto">
 		<form>
 			<tr>
-				<td><input type="checkbox"><img src="../imagenes/martillo.jpg"width="180" height="180"></td>
-				<td><input type="checkbox"><img src="../imagenes/guantes.png"width="180" height="180"></td>
+				<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/martillo.jpg"width="180" height="180"></td>
+				<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/guantes.png"width="180" height="180"></td>
 		
 			</tr>
 			<tr>
-				<td><input type="checkbox"><img src="../imagenes/cajon.jpg"width="180" height="180"></td>
-				<td><input type="checkbox"><img src="../imagenes/clavos.jpg" width="180" height="180" alt="Confirmar"></td>
+				<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/cajon.jpg"width="180" height="180"></td>
+				<td><input type="checkbox"><img src="index/imagenes/imagenesInternet/clavos.jpg" width="180" height="180" alt="Confirmar"></td>
 			</tr>
 		</form>
 	</table>
@@ -138,7 +144,7 @@
 		<div>
 			<table border="7" bordercolor="green">
 				<tr>
-					<td><button><img src="../imagenes/confirmar.jpg" width="200" alt="Confirmar"></button></td>
+					<td><button><img src="index/imagenes/imagenesInternet/confirmar.jpg" width="200" alt="Confirmar"></button></td>
 				</tr>
 			
 			</table>
@@ -147,5 +153,5 @@
 <footer>
 		<p>DERECHOS RESERVADOS UDC 2016</p>
 	</footer>
-</body>
+</center></body>
 </html>

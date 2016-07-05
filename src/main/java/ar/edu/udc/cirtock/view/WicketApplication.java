@@ -3,6 +3,7 @@ package ar.edu.udc.cirtock.view;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
+import ar.edu.udc.cirtock.view.internet.html.maceta_busqueda;
 import ar.edu.udc.cirtock.view.intranet.html.ProductoPage;
 
 /**
@@ -18,7 +19,7 @@ public class WicketApplication extends WebApplication {
 	@Override
 	public Class<? extends WebPage> getHomePage()
 	{
-		return ProductoPage.class;
+		return maceta_busqueda.class;
 	}
 
 	/**
