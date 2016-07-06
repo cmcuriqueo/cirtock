@@ -76,19 +76,55 @@ public class Consultas {
     }
     public static LinkedList<Producto> obtenerProductos(Connection conn, String patronDescripcion, String patronNombre, Integer patronCantidad){
 		LinkedList<Producto> productos = new LinkedList<>();
+		Boolean existePatronBusqueda = 
+				(patronDescripcion != null && patronDescripcion.trim().length()>0) 
+				|| (patronNombre != null && patronNombre.trim().length()>0)
+				|| (patronCantidad != null && patronCantidad>0) ;
 		StringBuffer query = new StringBuffer();
 		query.append("SELECT");
 		query.append("  p.id,");
 		query.append("  p.nombre,");
-		query.append("  p.descripcion,");
+		query.append("  p.descripcion ");
 		query.append("FROM");
-		query.append("  cirtock.producto p");
+		query.append("  cirtock.producto p ");
+		if (existePatronBusqueda){
+			query.append("WHERE ");
+			query.append("true ");
+			if (patronDescripcion != null && patronDescripcion.trim().length()>0){
+				query.append(" AND upper(p.descripcion) LIKE ?::text ");
+			}
+	
+			if (patronNombre != null && patronNombre.trim().length()>0){
+				query.append(" AND upper(p.nombre) LIKE ?::text ");
+			}
+	
+			if (patronCantidad != null && patronCantidad>0){
+				query.append(" AND p.cantidad LIKE ?::integer ");
+			}
+		}
+		
 		try {
+			
 			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+			int i = 0;
 			
+			if (patronDescripcion != null && patronDescripcion.trim().length()>0){
+				i++;
+				preparedStatement.setString(i, "%"+patronDescripcion.trim().toUpperCase()+"%");
+			}
+	
+			if (patronNombre != null && patronNombre.trim().length()>0){
+				i++;
+				preparedStatement.setString(i, "%"+patronNombre.trim().toUpperCase()+"%");
+			}
+	
+			if (patronCantidad != null && patronCantidad>0){
+				i++;
+				preparedStatement.setInt(i, patronCantidad);
+			}
 			ResultSet rs = preparedStatement.executeQuery();
-			
 			while (rs.next()) {
+				System.out.println("Producto encontado " + rs.getString("nombre"));
 				Producto nueva = new Producto();
 				nueva.setId(rs.getInt("id"));
 				nueva.setNombre(rs.getString("nombre"));

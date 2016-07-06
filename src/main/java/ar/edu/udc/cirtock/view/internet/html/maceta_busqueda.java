@@ -49,7 +49,7 @@ public class maceta_busqueda extends WebPage {
                         String nombre = validatable.getValue().trim().toUpperCase();
                         if(!nombre.matches("ADMIN")){
                             ValidationError error = new ValidationError();
-                            error.setMessage("El campo 'usuario' no es valido");
+                            error.setMessage("El 'usuario' no es valido");
                             validatable.error(error);
                         }
                     }
@@ -65,7 +65,7 @@ public class maceta_busqueda extends WebPage {
                         String descripcion = validatable.getValue().trim().toUpperCase();
                         if(!descripcion.matches("1234")){
                             ValidationError error = new ValidationError();
-                            error.setMessage("El campo 'Contraseña' no es valido");
+                            error.setMessage("La 'Contraseña' no es valido");
                             validatable.error(error);
                         }
                     }

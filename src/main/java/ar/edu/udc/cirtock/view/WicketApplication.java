@@ -4,7 +4,6 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
 import ar.edu.udc.cirtock.view.internet.html.maceta_busqueda;
-import ar.edu.udc.cirtock.view.intranet.html.ProductoPage;
 
 /**
  * Application object for your web application.

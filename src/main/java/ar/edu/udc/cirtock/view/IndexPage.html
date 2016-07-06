@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cirtock</title>
+    <link href="index/css/estilo.css" rel="stylesheet" type="text/css">
+    
+<link href="index/css/estilo.css" rel="stylesheet" type="text/css" />
+<script src="index/js/validacion/lib/jquery.js"></script>
+<script src="index/js/validacion/dist/jquery.validate.js"></script>
+<link rel="stylesheet" type="text/css" href="index/bootstrap/css/bootstrap.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="index/bootstrap/css/bootstrap-responsive.css">
+
+<script type="text/javascript">
+$().ready(function(){
+
+    $("#f_usuario").validate({
+        rules: {
+            usuario: {
+                 required: true,
+                 minlength: 3,
+                 maxlength: 20,
+
+            },
+            contrasenia:{
+                required: true,
+                minlength: 3
+            }
+        },
+        messages: {
+            usuario: {
+                required: "Campo obligatorio",
+                minlength: "Longitud minima 3 carácteres",
+                maxlength: "Longitud maxima 20 carácteres"
+            },
+            contrasenia : {
+                required: "Campo obligatorio",
+                minlength: "Longitud minima 3 carácteres"
+                
+            }
+        }
+     });
+ });
+</script>
+<style>
+        #commentForm {
+            width: 500px;
+        }
+        #commentForm label {
+            width: 250px;
+        }
+        #commentForm label.error, #commentForm input.submit {
+            margin-left: 253px;
+        }
+        #signupForm {
+            width: 670px;
+        }
+        #signupForm label.error {
+            margin-left: 10px;
+            width: auto;
+            display: inline;
+        }
+    </style>
+</head>
+<body><center>
+<!--Incio de contenido de la pagina principal-->
+<div class="etiquetaGenral">
+<!--encabezado de la pagina que html5 trae header tendra su estilo que esta en css-->
+  <header>
+    <a href="index.html"  class="logo"><img src="index/imagenes/logotipo.png" width="150" height="120" alt=""/></a>
+   <titulodelapagina>
+    <div align="center">
+	     <h2> SISTEMA DE CONTROL DE STOCK </h2>
+    </div>
+   </titulodelapagina>
+    
+   
+    <login><center>
+    <div style="color:red" wicket:id="feedbackErrors"></div>
+    <!--formulario de login que ya tiene el efecto-->  
+	<form wicket:id="f_usuario" role="form" id="f_usuario" method="get" action="../../intranet/html/producto.html"  >	
+		<fieldset>				<!-- agrupa en un cuadro tendra color pero eso esta en css-->
+  			
+      <!--los divido en contendor para poder manipular con css-->		
+      <div>									
+		    <label for="usuario">Usuario</label>
+        <input wicket:id="usuario" name="usuario" type="text">
+ 		  </div><br>
+ 		  <div>
+ 		 	  <label for="contrasenia">Contrase&ntilde;a</label>
+  	    <input wicket:id="contrasenia" name="constrasenia" type="text"/>
+		  </div>
+	   		<div> 
+          <p>
+            <input wicket:id="Ingresar" type="submit" class="btn btn-info" value="Ingresar">                        
+          </p>
+          <p></p>
+	   		</div>
+        <p></p>
+		</fieldset>
+	</form>	   
+      
+</center></login>
+  <p> <a href="extranet/catalogo.html">CATALOGO</a></p>
+  </header>
+  <br>
+  <br>
+  <!---seccion donde se modificara su contenido-->
+  <article class="contenidodelarticulo" id="contenidodelarticulo" align="">
+    <div class="titulodelaBusqueda" id="busqueda"> REALIZAR BUSQUEDA</div>
+    <p></p>
+		<!--declaro un contenedor donde estara las tablas dentro sirve para dar color a traves de css-->    
+      <div class="tablaconfotos" id="tablaconfotos">
+    <!--tabla donde se inciia para modelar fotos-->
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td style="text-align: center"><p><a href="internet/html/mesa_busqueda.html"><img src="index/imagenes/imagenesInternet/mesa.jpg" width="300" height="250" alt=""/></a></p></td>
+              <td style="text-align: center"><a href="internet/html/silla_busqueda.html"><img src="index/imagenes/imagenesInternet/silla.jpg" width="300" height="250" alt=""/></a></td>
+              <td style="text-align: center"><a href="internet/html/placard_busqueda.html"><img src="index/imagenes/imagenesInternet/placard.jpg" width="300" height="250" alt=""/></a></td>
+            </tr>
+            <tr>
+              <td style="text-align: center"><a href="internet/html/maceta_busqueda.html"><img src="index/imagenes/imagenesInternet/macetero.jpg" width="300" height="250" alt=""/></a></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>-</p>
+
+  </article>
+  <!--termina el cuerpo del articulo -->
+</div>
+<!--se declara el contenedor para pie de pagina-->
+<div class="piepagina" id="piepagina" align="center">DERECHOS RESERVADOS UDC 2016</div>
+</center>
+</body>
+</html>

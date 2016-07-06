@@ -63,7 +63,7 @@ public class FormularioInsumo extends WebPage {
                     @Override
                     public void validate(IValidatable<String> validatable) {
                         String nombre = validatable.getValue().trim().toUpperCase();
-                        if(!nombre.matches("^\\w{3,20}$")){
+                        if(!nombre.matches("^[\\w\\s]{3,20}$")){
                             ValidationError error = new ValidationError();
                             error.setMessage("El campo 'nombre' no es valido");
                             validatable.error(error);
@@ -79,7 +79,7 @@ public class FormularioInsumo extends WebPage {
                     @Override
                     public void validate(IValidatable<String> validatable) {
                         String descripcion = validatable.getValue().trim().toUpperCase();
-                        if(!descripcion.matches("^\\w{3,50}$")){
+                        if(!descripcion.matches("^[A-Za-z  ]{3,50}$")){
                             ValidationError error = new ValidationError();
                             error.setMessage("El campo 'descripcion' no es valido");
                             validatable.error(error);

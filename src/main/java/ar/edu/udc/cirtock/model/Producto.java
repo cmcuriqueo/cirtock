@@ -1,5 +1,6 @@
 package ar.edu.udc.cirtock.model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,12 @@ import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.exception.CirtockSQLException;
 
 
-public class Producto {
+public class Producto implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String nombre;
 	private String descripcion;
@@ -79,10 +85,10 @@ public class Producto {
 			StringBuffer query = new StringBuffer();
 			query.append("INSERT INTO cirtock.producto(");
 			query.append("  nombre,");
-			query.append("  descripcion,");
+			query.append("  descripcion");
 			query.append(") VALUES (");
 			query.append("  ?::text,");
-			query.append("  ?::text,");
+			query.append("  ?::text");
 			query.append(")");
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
