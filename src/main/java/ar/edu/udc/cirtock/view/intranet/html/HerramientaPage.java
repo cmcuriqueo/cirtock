@@ -17,92 +17,93 @@ import ar.edu.udc.cirtock.view.IndexPage;
 import ar.edu.udc.cirtock.view.intranet.negocio.FormularioHerramienta;
 import ar.edu.udc.cirtock.view.intranet.negocio.FormularioProducto;
 
-public class HerramientaPage extends WebPage{
+public class HerramientaPage extends WebPage {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	public LinkedList<Herramienta> herramientas;
-	@SuppressWarnings("unchecked")
-	public HerramientaPage() {
-		
-		add(new Link<ProductoPage>("cerrar") {
-	          /**
-			 * 
-			 */
-	    	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    public LinkedList<Herramienta> herramientas;
 
-			@Override
-		    public void onClick() {
-				setResponsePage(IndexPage.class);
-		    }
-	    });
-		
-	    add(new Link<ProductoPage>("producto") {
-	          /**
-			 * 
-			 */
-	    	private static final long serialVersionUID = 1L;
+    @SuppressWarnings("unchecked")
+    public HerramientaPage() {
 
-			@Override
-		    public void onClick() {
-				setResponsePage(ProductoPage.class);
-		    }
-	    });
-		
-	    add(new Link<InsumoPage>("insumo") {
-	          /**
-			 * 
-			 */
-	    	private static final long serialVersionUID = 1L;
+        add(new Link<ProductoPage>("cerrar") {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
-			@Override
-		    public void onClick() {
-				setResponsePage(InsumoPage.class);
-		    }
-	    });
-	    
-		Connection conn;
-		try {
-			conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
-			String patronDescripcion="";
-			Integer patronCantidad=null;
-			String patronNombre= "";
-			herramientas = Consultas.obtenerHerramientas(conn, patronDescripcion, patronNombre, patronCantidad);
-		} catch (CirtockException e) {
-			
-			System.out.println(e.getMessage());
-		}
-		
-		
-		add(new ListView("lista", herramientas) {
+            @Override
+            public void onClick() {
+                getSession().invalidate();
+                setResponsePage(IndexPage.class);
+            }
+        });
 
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+        add(new Link<ProductoPage>("producto") {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
-			@Override
-			protected void populateItem(ListItem item) {
-		        Herramienta herramienta = (Herramienta) item.getModelObject();
-		        item.add(new Label("nombre", herramienta.getNombre()));
-		        item.add(new Label("descripcion", herramienta.getDescripcion()));
-		        item.add(new Label("cantidad", herramienta.getCantidad()));
-			}
-		});
-		
-	    add(new Link<FormularioHerramienta>("nuevo") {
-	    /**
-	     * 
-	     */
-			private static final long serialVersionUID = 1L;
-	
-				@Override
-			    public void onClick() {
-					setResponsePage(FormularioHerramienta.class);
-			    }
-	    });
+            @Override
+            public void onClick() {
+                setResponsePage(ProductoPage.class);
+            }
+        });
 
-	}
+        add(new Link<InsumoPage>("insumo") {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void onClick() {
+                setResponsePage(InsumoPage.class);
+            }
+        });
+
+        Connection conn;
+        try {
+            conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
+            String patronDescripcion = "";
+            Integer patronCantidad = null;
+            String patronNombre = "";
+            herramientas = Consultas.obtenerHerramientas(conn, patronDescripcion, patronNombre, patronCantidad);
+        } catch (CirtockException e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        add(new ListView("lista", herramientas) {
+
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected void populateItem(ListItem item) {
+                Herramienta herramienta = (Herramienta) item.getModelObject();
+                item.add(new Label("nombre", herramienta.getNombre()));
+                item.add(new Label("descripcion", herramienta.getDescripcion()));
+                item.add(new Label("cantidad", herramienta.getCantidad()));
+            }
+        });
+
+        add(new Link<FormularioHerramienta>("nuevo") {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void onClick() {
+                setResponsePage(FormularioHerramienta.class);
+            }
+        });
+
+    }
 }

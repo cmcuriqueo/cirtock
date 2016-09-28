@@ -46,6 +46,10 @@ public class Consultas {
 
     public static LinkedList<Insumo> obtenerInsumos(Connection conn, String patronDescripcion, String patronNombre, Integer patronCantidad) {
 		LinkedList<Insumo> insumos = new LinkedList<>();
+		Boolean existePatronBusqueda = 
+				(patronDescripcion != null && patronDescripcion.trim().length()>0) 
+				|| (patronNombre != null && patronNombre.trim().length()>0)
+				|| (patronCantidad != null && patronCantidad>0) ;
 		StringBuffer query = new StringBuffer();
 		query.append("SELECT");
 		query.append("  i.id,");
@@ -53,9 +57,31 @@ public class Consultas {
 		query.append("  i.descripcion,");
 		query.append("  i.cantidad ");
 		query.append("FROM");
-		query.append("  cirtock.insumo i");
+		query.append("  cirtock.insumo i ");
+                if (existePatronBusqueda){
+			query.append("WHERE ");
+			query.append("true ");
+			if (patronDescripcion != null && patronDescripcion.trim().length()>0){
+				query.append(" AND upper(i.descripcion) LIKE ?::text ");
+			}
+	
+			if (patronNombre != null && patronNombre.trim().length()>0){
+				query.append(" AND upper(i.nombre) LIKE ?::text ");
+			}
+		}
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+			int i = 0;
+			
+			if (patronDescripcion != null && patronDescripcion.trim().length()>0){
+				i++;
+				preparedStatement.setString(i, "%"+patronDescripcion.trim().toUpperCase()+"%");
+			}
+	
+			if (patronNombre != null && patronNombre.trim().length()>0){
+				i++;
+				preparedStatement.setString(i, "%"+patronNombre.trim().toUpperCase()+"%");
+			}
 			
 			ResultSet rs = preparedStatement.executeQuery();
 			
@@ -97,10 +123,6 @@ public class Consultas {
 			if (patronNombre != null && patronNombre.trim().length()>0){
 				query.append(" AND upper(p.nombre) LIKE ?::text ");
 			}
-	
-			if (patronCantidad != null && patronCantidad>0){
-				query.append(" AND p.cantidad LIKE ?::integer ");
-			}
 		}
 		
 		try {
@@ -117,11 +139,7 @@ public class Consultas {
 				i++;
 				preparedStatement.setString(i, "%"+patronNombre.trim().toUpperCase()+"%");
 			}
-	
-			if (patronCantidad != null && patronCantidad>0){
-				i++;
-				preparedStatement.setInt(i, patronCantidad);
-			}
+                        
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				System.out.println("Producto encontado " + rs.getString("nombre"));

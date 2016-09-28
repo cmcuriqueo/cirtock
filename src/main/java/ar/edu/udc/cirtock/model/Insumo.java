@@ -17,6 +17,7 @@ package ar.edu.udc.cirtock.model;
 
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.exception.CirtockSQLException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,12 @@ import java.util.Arrays;
  *
  * @author Cesar
  */
-public class Insumo {
+public class Insumo implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String nombre;
     private String descripcion;
@@ -51,7 +57,7 @@ public class Insumo {
     public Integer getCantidad() {
         return cantidad;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -67,93 +73,93 @@ public class Insumo {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-    
-	/*
-	 * Precondicion: el metodo debe ser ejecutado en una transaccion
-	 **/
-	public void insert(String usuario, Connection conn) throws CirtockException {
 
-		try {
+    /*
+     * Precondicion: el metodo debe ser ejecutado en una transaccion
+     **/
+    public void insert(String usuario, Connection conn) throws CirtockException {
 
-			StringBuffer query = new StringBuffer();
-			query.append("INSERT INTO cirtock.insumo(");
-			query.append("  nombre,");
-			query.append("  descripcion,");
-			query.append("  cantidad");
-			query.append(") VALUES (");
-			query.append("  ?::text,");
-			query.append("  ?::text,");
-			query.append("  ?::integer");
-			query.append(")");
+        try {
 
-			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
-			preparedStatement.setString(1, this.nombre);
-			preparedStatement.setString(2, this.descripcion);
-			preparedStatement.setInt(3, this.cantidad);
-			preparedStatement.executeUpdate();
+            StringBuffer query = new StringBuffer();
+            query.append("INSERT INTO cirtock.insumo(");
+            query.append("  nombre,");
+            query.append("  descripcion,");
+            query.append("  cantidad");
+            query.append(") VALUES (");
+            query.append("  ?::text,");
+            query.append("  ?::text,");
+            query.append("  ?::integer");
+            query.append(")");
 
-			query = new StringBuffer();
-			query.append("SELECT currval('cirtock.seq_insumo') AS id");
-			preparedStatement = conn.prepareStatement(query.toString());
-			ResultSet rs = preparedStatement.executeQuery();
-			if (rs.next()) {
-				this.id = rs.getInt("id");
-			} else {
-				throw new CirtockException("No se pudo establecer el identificador del insumo");
-			}
-	
-		} catch (SQLException e) {
-			System.out.println(e.getMessage() + " - " + usuario);
-			System.out.println(Arrays.toString(e.getStackTrace()));
-			throw new CirtockSQLException("Error al agregar el insumo a la base de datos");
-		}
-	}
+            PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+            preparedStatement.setString(1, this.nombre);
+            preparedStatement.setString(2, this.descripcion);
+            preparedStatement.setInt(3, this.cantidad);
+            preparedStatement.executeUpdate();
 
-	public void update(String usuario, Connection conn) throws CirtockException{
+            query = new StringBuffer();
+            query.append("SELECT currval('cirtock.seq_insumo') AS id");
+            preparedStatement = conn.prepareStatement(query.toString());
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                this.id = rs.getInt("id");
+            } else {
+                throw new CirtockException("No se pudo establecer el identificador del insumo");
+            }
 
-		try {
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + " - " + usuario);
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            throw new CirtockSQLException("Error al agregar el insumo a la base de datos");
+        }
+    }
 
-			StringBuffer query;
-                        query = new StringBuffer();
-			query.append("UPDATE cirtock.insumo");
-			query.append("SET");
-			query.append("  nombre = ?::text,");
-			query.append("  descripcion = ?::text,");
-			query.append("  cantidad = ?::integer ");
-			query.append("WHERE id = ?::integer");
+    public void update(String usuario, Connection conn) throws CirtockException {
 
-			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
-			preparedStatement.setString(1, this.nombre);
-			preparedStatement.setString(2, this.descripcion);
-			preparedStatement.setInt(3, this.cantidad);
-                        preparedStatement.setInt(4, this.id);
-			preparedStatement.executeUpdate();
-	
-		} catch (SQLException e) {
-			System.out.println(e.getMessage() + " - " + usuario);
-			System.out.println(Arrays.toString(e.getStackTrace()));
-			throw new CirtockSQLException("Error al actualizar el insumo en la base de datos");
-		}
-		
-	}
+        try {
 
-	public void delete(String usuario, Connection conn) throws CirtockException {
+            StringBuffer query;
+            query = new StringBuffer();
+            query.append("UPDATE cirtock.insumo");
+            query.append("SET");
+            query.append("  nombre = ?::text,");
+            query.append("  descripcion = ?::text,");
+            query.append("  cantidad = ?::integer ");
+            query.append("WHERE id = ?::integer");
 
-		try {
+            PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+            preparedStatement.setString(1, this.nombre);
+            preparedStatement.setString(2, this.descripcion);
+            preparedStatement.setInt(3, this.cantidad);
+            preparedStatement.setInt(4, this.id);
+            preparedStatement.executeUpdate();
 
-			StringBuffer query;
-                        query = new StringBuffer();
-			query.append("DELETE cirtock.insumo");
-			query.append("WHERE id = ?::integer");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + " - " + usuario);
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            throw new CirtockSQLException("Error al actualizar el insumo en la base de datos");
+        }
 
-			PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
-			preparedStatement.setInt(1, this.id);
-			preparedStatement.executeUpdate();
-	
-		} catch (SQLException e) {
-			System.out.println(e.getMessage() + " - " + usuario);
-			System.out.println(Arrays.toString(e.getStackTrace()));
-			throw new CirtockSQLException("Error al eliminar el insumo de la base de datos");
-		}
-	}
+    }
+
+    public void delete(String usuario, Connection conn) throws CirtockException {
+
+        try {
+
+            StringBuffer query;
+            query = new StringBuffer();
+            query.append("DELETE cirtock.insumo");
+            query.append("WHERE id = ?::integer");
+
+            PreparedStatement preparedStatement = conn.prepareStatement(query.toString());
+            preparedStatement.setInt(1, this.id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + " - " + usuario);
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            throw new CirtockSQLException("Error al eliminar el insumo de la base de datos");
+        }
+    }
 }

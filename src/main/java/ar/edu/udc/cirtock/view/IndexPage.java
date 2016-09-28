@@ -20,84 +20,88 @@ import ar.edu.udc.cirtock.db.CirtockConnection;
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Usuario;
 import ar.edu.udc.cirtock.view.intranet.html.ProductoPage;
+import org.apache.wicket.markup.html.form.PasswordTextField;
 
 public class IndexPage extends WebPage {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private Form formulario;
-	private RequiredTextField<String> usuario;
-	private RequiredTextField<String> password;
-	
-	public IndexPage(final PageParameters parameters) {
-		
-		super(parameters);
-		add(new FeedbackPanel("feedbackErrors", new ExactLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
-		formulario = new Form("f_usuario");
-		
-		usuario = new RequiredTextField<String>("usuario", new Model());
-                
-        usuario.add(new IValidator<String>(){
-	        @Override
-	        public void validate(IValidatable<String> validatable) {
-		        String nombre = validatable.getValue().trim().toUpperCase();
-		        if(!nombre.matches("ADMIN")){
-			        ValidationError error = new ValidationError();
-			        error.setMessage("El 'usuario' no es valido");
-			        validatable.error(error);
-		        }
-	        }
+    private Form formulario;
+    private RequiredTextField<String> usuario;
+    private PasswordTextField password = new PasswordTextField("password", Model.of(""));
+
+    public IndexPage(final PageParameters parameters) {
+
+        super(parameters);
+        add(new FeedbackPanel("feedbackErrors", new ExactLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
+        formulario = new Form("f_usuario");
+
+        usuario = new RequiredTextField<>("usuario", new Model());
+
+        usuario.add(new IValidator<String>() {
+            @Override
+            public void validate(IValidatable<String> validatable) {
+                String nombre = validatable.getValue().trim().toUpperCase();
+                if (!nombre.matches("ADMIN")) {
+                    ValidationError error = new ValidationError();
+                    error.setMessage("El 'usuario' no es valido");
+                    validatable.error(error);
+                }
+            }
         });
         formulario.add(usuario);
-                
-        password = new RequiredTextField<String>("contrasenia", new Model());
-		              
-        password.add(new IValidator<String>(){
-	        @Override
-	        public void validate(IValidatable<String> validatable) {
-		        String descripcion = validatable.getValue().trim().toUpperCase();
-		        if(!descripcion.matches("1234")){
-			        ValidationError error = new ValidationError();
-			        error.setMessage("La 'Contraseña' no es valido");
-			        validatable.error(error);
-		        }
-	        }
+
+        password = new PasswordTextField("contrasenia", new Model());
+
+        password.add(new IValidator<String>() {
+            @Override
+            public void validate(IValidatable<String> validatable) {
+                String descripcion = validatable.getValue().trim().toUpperCase();
+                if (!descripcion.matches("1234")) {
+                    ValidationError error = new ValidationError();
+                    error.setMessage("La 'Contraseña' no es valido");
+                    validatable.error(error);
+                }
+            }
         });
         formulario.add(password);
-      
-            formulario.add(new Button("Ingresar"){
-			
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 
-			public void onSubmit() {
-				String usu = (String)usuario.getModelObject();
-				String pass = (String)password.getModelObject();
-				Connection conn = null;
-				try {
+        formulario.add(new Button("Ingresar") {
 
-					conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
-					Usuario usuario = new Usuario();
-					usuario.setUsuario(usu);
-					usuario.setPassword(pass);;
-					usuario.insert("", conn);
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
-				} catch (CirtockException e) {
-					System.out.println("Error al acceder a la base de datos");						
-				} finally {
-					try {
-						conn.close();
-					} catch (SQLException e) { ; }						
-				}
-				setResponsePage(ProductoPage.class);
-			};
-		});
+            @Override
+            public void onSubmit() {
+                String usu = (String) usuario.getModelObject();
+                String pass = (String) password.getModelObject();
+                Connection conn = null;
+                try {
+
+                    conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
+                    Usuario usuario = new Usuario();
+                    usuario.setUsuario(usu);
+                    usuario.setPassword(pass);
+                    usuario.insert("", conn);
+
+                } catch (CirtockException e) {
+                    System.out.println("Error al acceder a la base de datos");
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {;}
+                }
+                setResponsePage(ProductoPage.class);
+            }
+        ;
+        });
 		
 		add(formulario);
-	};
+    }
+;
 }

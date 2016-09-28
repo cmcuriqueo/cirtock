@@ -29,98 +29,129 @@ import ar.edu.udc.cirtock.db.Consultas;
 import ar.edu.udc.cirtock.exception.CirtockException;
 import ar.edu.udc.cirtock.model.Insumo;
 import ar.edu.udc.cirtock.view.IndexPage;
-import ar.edu.udc.cirtock.view.intranet.negocio.FormularioHerramienta;
 import ar.edu.udc.cirtock.view.intranet.negocio.FormularioInsumo;
+import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.model.Model;
+
 /**
  *
  * @author Cesar
  */
 public class InsumoPage extends WebPage {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	public LinkedList<Insumo> insumos;
-	@SuppressWarnings("unchecked")
-	public InsumoPage() {
-		
-		add(new Link<ProductoPage>("cerrar") {
-	          /**
-			 * 
-			 */
-	    	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    public LinkedList<Insumo> insumos = null;
+    public Link<IndexPage> cerrar;
+    public Link<ProductoPage> producto;
+    public Link<HerramientaPage> herramienta;
+    public ListView lista;
+    public TextField<String> busquedaInput;
+    public Form formBusqueda;
 
-			@Override
-		    public void onClick() {
-				setResponsePage(IndexPage.class);
-		    }
-	    });
-		
-	    add(new Link<ProductoPage>("producto") {
-	          /**
-			 * 
-			 */
-	    	private static final long serialVersionUID = 1L;
+    {
+        Connection conn;
+        try {
+            conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
+            Integer patronCantidad = null;
+            insumos = Consultas.obtenerInsumos(conn, "", "", patronCantidad);
+        } catch (CirtockException e) {
+            System.out.println(e.getMessage());
+        }
+        lista = new ListView("lista", insumos) {
 
-			@Override
-		    public void onClick() {
-				setResponsePage(ProductoPage.class);
-		    }
-	    });
-		
-	    add(new Link<HerramientaPage>("herramienta") {
-	          /**
-			 * 
-			 */
-	    	private static final long serialVersionUID = 1L;
+            private static final long serialVersionUID = 1L;
 
-			@Override
-		    public void onClick() {
-				setResponsePage(HerramientaPage.class);
-		    }
-	    });
-	    
-		Connection conn;
-		try {
-			conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
-			String patronDescripcion="";
-			Integer patronCantidad=null;
-			String patronNombre= "";
-			insumos = Consultas.obtenerInsumos(conn, patronDescripcion, patronNombre, patronCantidad);
-		} catch (CirtockException e) {
-			
-			System.out.println(e.getMessage());
-		}
-		
-		
-		add(new ListView("lista", insumos) {
+            @Override
+            protected void populateItem(ListItem item) {
+                Insumo insumo = (Insumo) item.getModelObject();
+                item.add(new Label("nombre", insumo.getNombre()));
+                item.add(new Label("descripcion", insumo.getDescripcion()));
+                item.add(new Label("cantidad", insumo.getCantidad()));
+            }
+        };
+    }
 
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+    @SuppressWarnings("unchecked")
+    public InsumoPage() {
+        cerrar = new Link<IndexPage>("cerrar") {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
-			@Override
-			protected void populateItem(ListItem item) {
-		        Insumo insumo = (Insumo) item.getModelObject();
-		        item.add(new Label("nombre", insumo.getNombre()));
-		        item.add(new Label("descripcion", insumo.getDescripcion()));
-		        item.add(new Label("cantidad", insumo.getCantidad()));
-			}
-		});
-		
-	      add(new Link<FormularioInsumo>("nuevo") {
-	          /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+            @Override
+            public void onClick() {
+                setResponsePage(IndexPage.class);
+            }
+        };
+        producto = new Link<ProductoPage>("producto") {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
-			@Override
-	          public void onClick() {
-	              setResponsePage(FormularioInsumo.class);
-	          }
-	      });
+            @Override
+            public void onClick() {
+                setResponsePage(ProductoPage.class);
+            }
+        };
 
-	}
+        herramienta = new Link<HerramientaPage>("herramienta") {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void onClick() {
+                setResponsePage(HerramientaPage.class);
+            }
+        };
+        formBusqueda = new Form("form_busqueda");
+
+        busquedaInput = new TextField<String>("busquedaInput", new Model<String>());
+        formBusqueda.add(busquedaInput);
+
+        formBusqueda.add(new Button("busquedaBoton") {
+
+            @Override
+            public void onSubmit() {
+                String busqueda = busquedaInput.getModelObject();
+                Connection conn;
+                try {
+                    conn = CirtockConnection.getConection("cirtock", "cirtock", "cirtock");
+                    insumos = Consultas.obtenerInsumos(conn, null, busqueda, null);
+                    lista.setList(insumos);
+                } catch (CirtockException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
+        
+        add(formBusqueda);
+
+        add(cerrar);
+        add(producto);
+        add(herramienta);
+
+        add(lista);
+
+        add(new Link<FormularioInsumo>("nuevo") {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void onClick() {
+                setResponsePage(FormularioInsumo.class);
+            }
+        });
+
+    }
 }
